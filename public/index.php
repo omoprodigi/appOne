@@ -22,8 +22,8 @@ define('LARAVEL_START', microtime(true));
 */
 
 require __DIR__.'/../vendor/autoload.php';
-//CORS
-header("Access-Control-Allow-Origin: http://oriaddesign.com"); 
+// CORS
+//header("Access-Control-Allow-Origin: http://oriaddesign.com"); 
 
 /*
 |--------------------------------------------------------------------------
