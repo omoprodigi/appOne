@@ -20,9 +20,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('customer', 'CustomerController@index')->middleware('cors');
+Route::get('customer', 'CustomerController@index');//->middleware('cors');
 Route::get('customers/{customer}', 'CustomerController@show')->middleware('auth:api');
-Route::post('customers', 'CustomerController@store')->middleware('cors');
+Route::post('customers', 'CustomerController@store');//->middleware('cors');
 Route::post('customers/confirmed', 'CustomerController@confirmed');
 Route::put('customers/{customer}', 'CustomerController@update')->middleware('auth:api');
 Route::delete('customers/{customer}', 'CustomerController@delete')->middleware('auth:api');
