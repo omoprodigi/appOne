@@ -24,7 +24,7 @@ class CustomerController extends Controller
 
     public function store(Request $request)
     {
-        $secretKey = 'sk_test_3582bc5c00d9f5d4f0b8e168e883c4d0f0f0a976';
+        $secretKey = 'sk_live_a36687896d52aa5ec980ae75f8cff2b2448fd245';
         
         $amount = $request->input('amount');
 
@@ -69,7 +69,7 @@ class CustomerController extends Controller
 
     public function confirmed(Request $request)
     {
-        $secretKey = 'sk_test_3582bc5c00d9f5d4f0b8e168e883c4d0f0f0a976';
+        $secretKey = 'sk_live_a36687896d52aa5ec980ae75f8cff2b2448fd245';
         
         $body = json_decode($request->getContent());
 
