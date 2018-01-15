@@ -44,7 +44,7 @@ class ChargeCustomers extends Command
     public function handle()
     {
         $secretKey = 'sk_test_3582bc5c00d9f5d4f0b8e168e883c4d0f0f0a976';
-        foreach (Customer::where('due_date', '<=', Carbon::now())->cursor() as $customer) {
+        foreach (Customer::where('due_date', '<', Carbon::now())->cursor() as $customer) {
             //
             $client = new Client(); //GuzzleHttp\Client
             $response = $client->post('https://api.paystack.co/transaction/charge_authorization', [
