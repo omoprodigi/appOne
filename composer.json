@@ -15,7 +15,8 @@
         "laravel/passport": "^4.0",
         "laravel/tinker": "~1.0",
         "mockery/mockery": "~1.0",
-        "phpunit/phpunit": "~6.0"
+        "phpunit/phpunit": "~6.0",
+        "ext-mbstring": "*"
     },
     "require-dev": {
         "filp/whoops": "~2.0",
