@@ -7,7 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Customer extends Model
 {
     //
-    protected $fillable = ['fullName', 'email', 'authCode', 'due_date', 'billable'];
+    protected $fillable = ['fullName', 'email', 'authCode', 
+                            'due_date', 'billable', 'due_amount', 
+                            'charge_status'
+                            ];
 
     public function transactions()
     {

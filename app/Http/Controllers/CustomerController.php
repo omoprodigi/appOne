@@ -27,10 +27,13 @@ class CustomerController extends Controller
         $secretKey = 'sk_live_a36687896d52aa5ec980ae75f8cff2b2448fd245';
         
         $amount = $request->input('amount');
+        $due_amount = $request->input('due_amount');
 
         $model = $request->all();
-        $model['due_date'] = Carbon::now()->addDays(30); 
+        // $model['due_date'] = Carbon::now()->addDays(30);
+        $model['due_date'] = Carbon::now()->addMinutes(10); 
         $model['billable'] = $amount;
+        $model['due_amount'] = $due_amount;
         $customer = Customer::create($model);
 
 
