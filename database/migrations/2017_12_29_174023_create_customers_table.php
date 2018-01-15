@@ -16,7 +16,7 @@ class CreateCustomersTable extends Migration
         Schema::create('customers', function (Blueprint $table) {
             $table->increments('id');
             $table->string('fullName');
-            $table->string('email');
+            $table->string('email')->unique();
             $table->datetime('due_date');
             $table->decimal('billable', 8, 2);
             $table->decimal('due_amount', 8, 2);
