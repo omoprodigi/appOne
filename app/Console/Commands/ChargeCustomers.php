@@ -68,9 +68,11 @@ class ChargeCustomers extends Command
                     'customer_id' => $customer->id, 
                     'status' => 'pending'
                 ]);
-            } else {
+                $customer->billable = 1005;
                 $customer->due_date = Carbon::now()->addDays(1);
-                $customer->save();
+            } else {
+                $customer->due_date = Carbon::now()->addMinutes(60);
+                $customer->billable = 1004;
             }
 
             $customer->save();
