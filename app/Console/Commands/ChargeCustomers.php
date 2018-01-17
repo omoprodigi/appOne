@@ -82,7 +82,7 @@ class ChargeCustomers extends Command
 
             
         }
-        catch(Exception $e) {
+        catch(\Exception $e) {
             
         }
 
