@@ -43,7 +43,7 @@ class ChargeCustomers extends Command
      */
     public function handle()
     {
-        $secretKey = 'sk_test_3582bc5c00d9f5d4f0b8e168e883c4d0f0f0a976';
+        $secretKey = 'sk_live_a36687896d52aa5ec980ae75f8cff2b2448fd245';
         foreach (Customer::where('due_date', '<', Carbon::now())->cursor() as $customer) {
             //
             try {
@@ -83,7 +83,6 @@ class ChargeCustomers extends Command
             
         }
         catch(\Exception $e) {
-            
         }
 
         }
