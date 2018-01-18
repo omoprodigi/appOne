@@ -43,10 +43,20 @@ class ChargeCustomers extends Command
      */
     public function handle()
     {
+        Event::create([
+            'event' => 'Charge Customers Schedule',
+        ]);
+
         $secretKey = 'sk_live_a36687896d52aa5ec980ae75f8cff2b2448fd245';
         foreach (Customer::where('due_date', '<', Carbon::now())->cursor() as $customer) {
             //
             try {
+
+                Event::create([
+                    'event' => 'Charge this customer',
+                    'field_one' => $customer->authCode,
+                    'field_two' => $customer->due_amount
+                ]);
 
             $client = new Client(); //GuzzleHttp\Client
             $response = $client->post('https://api.paystack.co/transaction/charge_authorization', [
@@ -63,6 +73,12 @@ class ChargeCustomers extends Command
 
             if ($response->getStatusCode() == 200) {
                 $body = json_decode($response->getBody());
+                Event::create([
+                    'event' => 'Customer charged',
+                    'field_one' => $customer->email,
+                    'field_two' => $body
+                ]);
+                
                 $tranxReference = $body->data->reference;
                 $transaction =  Transaction::create([
                     'amount' => $customer->due_amount,
@@ -73,6 +89,10 @@ class ChargeCustomers extends Command
                 $customer->billable = 1005;
                 $customer->due_date = Carbon::now()->addDays(1);
             } else {
+                Event::create([
+                    'event' => 'Failed to charge customer',
+                    'field_one' => $customer->email
+                ]);
                 $customer->due_date = Carbon::now()->addMinutes(60);
                 $customer->billable = 1004;
             }
@@ -83,6 +103,11 @@ class ChargeCustomers extends Command
             
         }
         catch(\Exception $e) {
+            Event::create([
+                'event' => 'Error charging customer',
+                'field_one' => $e
+            ]);
+            
         }
 
         }
