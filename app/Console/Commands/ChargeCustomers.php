@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Carbon\Carbon;
 use App\Customer;
+use App\Event;
 use App\Transaction;
 use Illuminate\Http\Request;
 use GuzzleHttp\Exception\GuzzleException;
