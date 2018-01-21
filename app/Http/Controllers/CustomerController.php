@@ -74,6 +74,8 @@ class CustomerController extends Controller
 
     public function confirmed(Request $request)
     {
+        $body = json_decode($request->getContent());
+        
         Event::create([
             'event' => 'Paystack Callback',
             'field_one' => $body->data->reference,
