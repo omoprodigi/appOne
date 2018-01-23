@@ -49,7 +49,10 @@ class ChargeCustomers extends Command
         ]);
 
         $secretKey = 'sk_live_a36687896d52aa5ec980ae75f8cff2b2448fd245';
-        foreach (Customer::where('due_date', '<', Carbon::now())->cursor() as $customer) {
+        foreach (Customer::where([
+                                    ['due_date', '<', Carbon::now()],
+                                    ['charge_status', '=', false]
+                            ])->cursor() as $customer) {
             //
             try {
 
@@ -77,7 +80,7 @@ class ChargeCustomers extends Command
                 Event::create([
                     'event' => 'Customer charged',
                     'field_one' => $customer->email,
-                    'field_two' => $body
+                    'field_two' => $body->message
                 ]);
                 
                 $tranxReference = $body->data->reference;
@@ -85,10 +88,11 @@ class ChargeCustomers extends Command
                     'amount' => $customer->due_amount,
                     'reference' => $tranxReference,
                     'customer_id' => $customer->id, 
-                    'status' => 'pending'
+                    'status' => 'success'
                 ]);
                 $customer->billable = 1005;
-                $customer->due_date = Carbon::now()->addDays(1);
+                $customer->charge_status = true;
+                // $customer->due_date = Carbon::now()->addDays(1);
             } else {
                 Event::create([
                     'event' => 'Failed to charge customer',
@@ -106,7 +110,7 @@ class ChargeCustomers extends Command
         catch(\Exception $e) {
             Event::create([
                 'event' => 'Error charging customer',
-                'field_one' => $e
+                'field_one' => $customer->email
             ]);
             
         }

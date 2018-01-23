@@ -17,7 +17,7 @@ class CreateEventsTable extends Migration
             $table->increments('id');
             $table->string('event');
             $table->string('field_one')->default("N/A");
-            $table->string('field_two')->default("N/A");;
+            $table->string('field_two')->default("N/A");
             $table->timestamps();
         });
     }

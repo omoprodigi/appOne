@@ -75,7 +75,7 @@ class CustomerController extends Controller
     public function confirmed(Request $request)
     {
         $body = json_decode($request->getContent());
-        
+
         Event::create([
             'event' => 'Paystack Callback',
             'field_one' => $body->data->reference,
@@ -84,7 +84,7 @@ class CustomerController extends Controller
         $secretKey = 'sk_live_a36687896d52aa5ec980ae75f8cff2b2448fd245';
         // $secretKey = 'sk_test_3582bc5c00d9f5d4f0b8e168e883c4d0f0f0a976';
 
-        $body = json_decode($request->getContent());
+        // $body = json_decode($request->getContent());
 
         if ($body->event == "charge.success") {
             $transaction = Transaction::where('reference', $body->data->reference)->first();

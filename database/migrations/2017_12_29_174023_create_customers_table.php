@@ -21,6 +21,7 @@ class CreateCustomersTable extends Migration
             $table->decimal('billable', 8, 2);
             $table->decimal('due_amount', 8, 2);
             $table->string('authCode')->default('');
+            $table->boolean('charge_status')->default(false);
             $table->timestamps();
         });
     }
